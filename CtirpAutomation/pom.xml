@@ -65,7 +65,7 @@
         
   <plugins>
   <plugin>
-              <artifactId>maven-compiler-plugin</artifactId>
+           <artifactId>maven-compiler-plugin</artifactId>
               <configuration>
                   <source>1.7</source>
                   <target>1.7</target>
@@ -128,7 +128,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+     </plugin>
   </plugins>
   </build>
 </project>
