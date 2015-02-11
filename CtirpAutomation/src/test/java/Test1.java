@@ -10,7 +10,7 @@ public class Test1 {
 		assert "edddc".endsWith("c");
 		Reporter.log("just a test");
 		
-		Reporter.log("werer", false);
+		Reporter.log("werer1", false);
 		}
 	}
 
