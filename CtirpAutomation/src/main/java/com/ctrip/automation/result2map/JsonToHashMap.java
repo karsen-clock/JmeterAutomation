@@ -2,6 +2,7 @@ package com.ctrip.automation.result2map;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
@@ -23,13 +24,17 @@ public static HashMap<String,Object> parserToMap(String s)
     while (keys.hasNext()) {
       String key = (String)keys.next();
       String value = json.get(key).toString();
+//      System.out.println(key);
+//      System.out.println(value);
       if ((value.startsWith("{")) && (value.endsWith("}")))
       {
         map.put(key, parserToMap(value));
       }
-      else if((value.startsWith("[")) && (value.endsWith("]")))
+      else if((value.startsWith("[{")) && (value.endsWith("}]")))
       {
-    	  list.add(parserToMap(value.substring(1, value.length()-1)));
+    	  String listString=value.substring(1, value.length()-1);
+    	  System.out.println(listString);
+    	  list=paraseToList(listString);
     	  map.put(key,list);
     	 
       }
@@ -40,4 +45,25 @@ public static HashMap<String,Object> parserToMap(String s)
 
     return map;
   }
+  
+  
+  public static List paraseToList(String value)
+  {
+  	List list=new ArrayList<Object>();
+    String [] array=value.split("(<[^>]*>)");
+    for(String s:array)
+    {
+    	try {
+			list.add(parserToMap(s));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+ 	System.out.println(list);
+  	return list;
+ 
+  }
 }
+
+
