@@ -50,7 +50,7 @@ public static HashMap<String,Object> parserToMap(String s)
   public static List paraseToList(String value)
   {
   	List list=new ArrayList<Object>();
-    String [] array=value.split("(<[^>]*>)");
+    String [] array=value.split("(?<={)(?=})");
     for(String s:array)
     {
     	try {
