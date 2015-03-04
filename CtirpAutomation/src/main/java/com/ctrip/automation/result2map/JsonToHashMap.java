@@ -19,6 +19,7 @@ public static HashMap<String,Object> parserToMap(String s)
   {
     HashMap map = new HashMap();
     List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+    System.out.println(s);
     JSONObject json = new JSONObject(s);
     Iterator keys = json.keys();
     while (keys.hasNext()) {
@@ -50,16 +51,19 @@ public static HashMap<String,Object> parserToMap(String s)
   public static List paraseToList(String value)
   {
   	List list=new ArrayList<Object>();
-    String [] array=value.split("(?<={)(?=})");
+  	System.out.println(value);
+    String [] array=value.split("\\{(\\[\\^\\{\\}\\]+)\\}");
     for(String s:array)
     {
     	try {
+    		System.out.println(s);
 			list.add(parserToMap(s));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
+    System.out.println("----");
  	System.out.println(list);
   	return list;
  
