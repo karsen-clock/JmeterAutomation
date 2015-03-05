@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class JsonToHashMap
 {
@@ -31,11 +32,11 @@ public static HashMap<String,Object> parserToMap(String s)
       {
         map.put(key, parserToMap(value));
       }
-      else if((value.startsWith("[{")) && (value.endsWith("}]")))
+      else if((value.startsWith("[")) && (value.endsWith("]")))
       {
-    	  String listString=value.substring(1, value.length()-1);
-    	  System.out.println(listString);
-    	  list=paraseToList(listString);
+    	  JSONArray ja=new JSONArray(value);
+    	  list=paraseToList(ja);
+
     	  map.put(key,list);
     	 
       }
@@ -48,23 +49,21 @@ public static HashMap<String,Object> parserToMap(String s)
   }
   
   
-  public static List paraseToList(String value)
+  public static List<Map<String, Object>> paraseToList(JSONArray jsonArray )  
   {
-  	List list=new ArrayList<Object>();
-  	System.out.println(value);
-    String [] array=value.split("\\{(\\[\\^\\{\\}\\]+)\\}");
-    for(String s:array)
+  	List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+    for(int i=0;i<jsonArray.length();i++)
     {
+
     	try {
-    		System.out.println(s);
-			list.add(parserToMap(s));
+			list.add(parserToMap(jsonArray.getString(i)));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
     }
-    System.out.println("----");
- 	System.out.println(list);
+
   	return list;
  
   }

@@ -39,11 +39,10 @@ public class Test1 {
         }
         br.close();
         String ss=sb.toString();
-        System.out.println(ss);
         
         JsonToHashMap js=new JsonToHashMap();
        //System.out.println(((HashMap<String,Object>) ((ArrayList) js.parserToMap(ss).get("payInfo")).get(0)).get("payInfoMain"));
-        System.out.println(js.parserToMap(ss).get("people").getClass());
+        System.out.println(((HashMap<String,Object>) ((List) js.parserToMap(ss).get("people")).get(1)).get("lastName"));
         
         
         
