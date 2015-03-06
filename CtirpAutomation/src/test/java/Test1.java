@@ -15,7 +15,8 @@ import org.json.JSONException;
  
 public class Test1 {
      
-    public static void main(String[] args) throws IOException, JSONException
+    @SuppressWarnings("static-access")
+	public static void main(String[] args) throws IOException, JSONException
     {
     	
     	
@@ -28,21 +29,22 @@ public class Test1 {
 	            
 	            
 //                文件绝对路径改成你自己的文件路径
-        FileReader fr=new FileReader("C:\\Users\\hasee\\Desktop\\json.txt");
+        FileReader fr=new FileReader("d:\\Users\\cdzhang\\Desktop\\json.txt");
         StringBuilder sb=new StringBuilder();
         String s="";
         //可以换成工程目录下的其他文本文件
         BufferedReader br=new BufferedReader(fr);
         while((s=br.readLine())!=null){
-        	sb.append(s + "\n");
+        	sb.append(s);
            
         }
         br.close();
         String ss=sb.toString();
         
         JsonToHashMap js=new JsonToHashMap();
+        System.out.println("hhele");
        //System.out.println(((HashMap<String,Object>) ((ArrayList) js.parserToMap(ss).get("payInfo")).get(0)).get("payInfoMain"));
-        System.out.println(((HashMap<String,Object>) ((List) js.parserToMap(ss).get("people")).get(1)).get("lastName"));
+        System.out.println (js.parserToMap(ss));
         
         
         
