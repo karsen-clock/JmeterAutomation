@@ -20,7 +20,6 @@ public static HashMap<String,Object> parserToMap(String s)
   {
     HashMap map = new HashMap();
     List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
-    System.out.println(s);
     JSONObject json = new JSONObject(s);
     Iterator keys = json.keys();
     while (keys.hasNext()) {
