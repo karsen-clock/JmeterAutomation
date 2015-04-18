@@ -36,14 +36,7 @@ public class XmlToHtml {
 	        }
 	    }
 
-		public static void main(String[] args) {
-			// TODO Auto-generated method stub
-			String xmlFileName = "C:\\Bill\\temp\\convert2HTML\\test.xml";
-	        String xslFileName = "C:\\Bill\\temp\\convert2HTML\\xsl.xsl";
-	        String htmlFileName = "C:\\Bill\\temp\\convert2HTML\\html.html";
-	        Transform(xmlFileName, xslFileName, htmlFileName);
 
-		}
 
 	}
 
