@@ -48,6 +48,39 @@ public static HashMap<String,Object> parserToMap(String s)
   }
   
   
+  public static HashMap<String,Object> parserToMap(String s,Boolean lite)
+		    throws JSONException
+		  {
+		    HashMap map = new HashMap();
+		    List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+		    JSONObject json = new JSONObject(s);
+		    Iterator keys = json.keys();
+		    while (keys.hasNext()) {
+		      String key = (String)keys.next();
+		      String value = json.get(key).toString();
+//		      System.out.println(key);
+//		      System.out.println(value);
+		      if ((value.startsWith("{")) && (value.endsWith("}")))
+		      {
+		        map.put(key, parserToMap(value));
+		      }
+		      else if((value.startsWith("[")) && (value.endsWith("]")))
+		      {
+		    	  JSONArray ja=new JSONArray(value);
+		    	  list=paraseToList(ja);
+
+		    	  map.put(key,list);
+		    	 
+		      }
+		      else if(lite==false ||(lite==true && !value.equals("")))
+		      {
+		        map.put(key, value);
+		      }
+		    }
+
+		    return map;
+		  }
+  
   public static List<Map<String, Object>> paraseToList(JSONArray jsonArray )  
   {
   	List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
