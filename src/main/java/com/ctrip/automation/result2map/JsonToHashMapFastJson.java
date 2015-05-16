@@ -65,7 +65,6 @@ public static HashMap<String,Object> paraseToMap(String s)
 	  HashMap<String,Object> mapResult=new HashMap<String,Object>();
 	  mapResult=paraseToMapJSONObject(s);
 	  List hashMapList=new ArrayList();
-	  
 	  Iterator iter = mapResult.entrySet().iterator();
 	  while(iter.hasNext())
 	  {
