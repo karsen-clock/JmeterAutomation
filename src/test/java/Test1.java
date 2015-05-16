@@ -6,9 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.ctrip.automation.result2map.HtmlToHashMap;
 import com.ctrip.automation.result2map.JsonToHashMap;
 import com.ctrip.automation.result2map.JsonToHashMapFastJson;
+
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.parser.Feature;
 
 import java.util.Map;
 
@@ -42,13 +46,20 @@ public class Test1 {
         }
         
         br.close();
-        String ss=sb.toString();
+        String ss=new String(sb.toString().getBytes(),"UTF-8");
         
         System.out.println(ss);
         
+        Feature[] ff={Feature.InitStringFieldAsEmpty};
+        SerializerFeature[] features={SerializerFeature.WriteMapNullValue}; 
+        
         JsonToHashMapFastJson js=new JsonToHashMapFastJson();
         System.out.println("hhele");
-        System.out.println(js.paraseToMap(ss));
+        HashMap<String,Object> hh=new HashMap<String,Object>();
+        hh=js.paraseToMap(ss);
+        hh.put("cctv"," ");
+        System.out.println(hh);
+        System.out.println(js.toJsonString(hh,features));
        //System.out.println(((HashMap<String,Object>) ((ArrayList) js.parserToMap(ss).get("payInfo")).get(0)).get("payInfoMain"));
        //System.out.println (((List) ((HashMap<String,Object>) js.parserToMap(ss).get("SearchOrderResult")).get("ItineraryList")).get(0));
         
