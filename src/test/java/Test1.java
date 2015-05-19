@@ -59,7 +59,7 @@ public class Test1 {
         hh=js.paraseToMap(ss);
         hh.put("cctv"," ");
         System.out.println(hh);
-        System.out.println(js.toJsonString(hh,features));
+        System.out.println(js.toJsonString(hh,true));
        //System.out.println(((HashMap<String,Object>) ((ArrayList) js.parserToMap(ss).get("payInfo")).get(0)).get("payInfoMain"));
        //System.out.println (((List) ((HashMap<String,Object>) js.parserToMap(ss).get("SearchOrderResult")).get("ItineraryList")).get(0));
         

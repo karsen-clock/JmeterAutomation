@@ -107,9 +107,27 @@ public static HashMap<String,Object> paraseToMap(String s)
   }
   
   //不带参数
-  public static String toJsonString(Object map,SerializerFeature[] features)
+  public static String toJsonString(Object map,boolean WriteNullValue)
   {
-
+	  String jsonString="";
+	  if(WriteNullValue)
+	  {
+		   SerializerFeature[] features={SerializerFeature.WriteMapNullValue}; 
+		   jsonString=JSON.toJSONString(map,features);
+	  }
+	  else
+	  {
+		  SerializerFeature[] features={SerializerFeature.NotWriteDefaultValue};
+		  jsonString=JSON.toJSONString(map,features);
+	  }
+	  
+	  return jsonString;
+  }
+  
+  
+  //自定义参数
+  public static String toJsonString(Object map,SerializerFeature [] features )
+  {
 	  String jsonString=JSON.toJSONString(map,features);
 	  return jsonString;
   }
