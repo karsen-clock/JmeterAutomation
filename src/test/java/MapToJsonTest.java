@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 import org.json.*;
 
-import com.ctrip.automation.*;
+
 import com.ctrip.automation.result2map.JsonToHashMap;
 public class MapToJsonTest {
 
