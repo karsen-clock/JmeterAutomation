@@ -11,7 +11,7 @@ import com.ctrip.automation.result2map.HtmlToHashMap;
 import com.ctrip.automation.result2map.JsonToHashMap;
 import com.ctrip.automation.result2map.JsonToHashMapFastJson;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
+
 import com.alibaba.fastjson.parser.Feature;
 
 import java.util.Map;
