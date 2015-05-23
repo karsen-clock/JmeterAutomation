@@ -43,7 +43,7 @@ public class JsonToHashMapFastJson
 	
 
 //反序列化
-  public static HashMap<String,Object> paraseToMapJSONObject(String s)
+  public static HashMap<String,Object> parseToMapJSONObject(String s)
   {
 	  
 	  HashMap<String, Object> map=JSON.parseObject(s, new TypeReference<HashMap<String,Object>>(){});
@@ -63,7 +63,7 @@ public static HashMap<String,Object> jsonToHashMap(String s)
 
 	  
 	  HashMap<String,Object> mapResult=new HashMap<String,Object>();
-	  mapResult=paraseToMapJSONObject(s);
+	  mapResult=parseToMapJSONObject(s);
 	  List hashMapList=new ArrayList();
 	  Iterator iter = mapResult.entrySet().iterator();
 	  while(iter.hasNext())
@@ -91,7 +91,7 @@ public static HashMap<String,Object> jsonToHashMap(String s)
 		  //如果是JSONObject则直接修改map
 		  else if(value.getClass().getName()=="com.alibaba.fastjson.JSONObject")
 		  {
-			  mapResult.put(key, paraseToMapJSONObject(value.toString()));
+			  mapResult.put(key, parseToMapJSONObject(value.toString()));
 		  }
 
 	  }

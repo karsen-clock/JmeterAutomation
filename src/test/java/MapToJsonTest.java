@@ -1,9 +1,13 @@
 import java.util.HashMap;
 
-import org.json.*;
+//import org.json.*;
 
 
-import com.ctrip.automation.result2map.JsonToHashMap;
+
+
+
+import com.alibaba.fastjson.JSONException;
+import com.ctrip.automation.result2map.JsonToHashMapFastJson;
 public class MapToJsonTest {
 
 	public static void main(String[] args) {
@@ -12,14 +16,12 @@ public class MapToJsonTest {
 		map.put("test", "123");
 		map.put("cctv", "");
 		System.out.println(map);
-		JSONObject json=new JSONObject(map);
+		JsonToHashMapFastJson json=new JsonToHashMapFastJson();
 		System.out.println(json);
-		JsonToHashMap ps=new JsonToHashMap();
+		JsonToHashMapFastJson ps=new JsonToHashMapFastJson();
 		
 		try {
-			System.out.println(ps.jsonToHashMap(json.toString(), true));
-			JSONObject json2 = new JSONObject(ps.jsonToHashMap(json.toString(), true));
-			System.out.println(json2.toString());
+			System.out.println(ps.toJsonString(json.toString(), true));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
