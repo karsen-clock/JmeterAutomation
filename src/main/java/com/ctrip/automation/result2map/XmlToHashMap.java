@@ -14,7 +14,7 @@ import org.dom4j.Element;
 public class XmlToHashMap
 {
   @SuppressWarnings("unchecked")
-public static Map<String, Object> Dom2Map(Document doc)
+public static Map<String, Object> dom2Map(Document doc)
   {
     @SuppressWarnings("rawtypes")
 	Map map = new HashMap();

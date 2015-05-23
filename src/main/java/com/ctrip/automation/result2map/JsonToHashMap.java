@@ -48,7 +48,7 @@ public static HashMap<String,Object> parserToMap(String s)
   }
   
   
-  public static HashMap<String,Object> parserToMap(String s,Boolean lite)
+  public static HashMap<String,Object> jsonToHashMap(String s,Boolean lite)
 		    throws JSONException
 		  {
 		    HashMap map = new HashMap();

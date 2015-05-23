@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 public class HtmlToHashMap
 {
   @SuppressWarnings({ "rawtypes", "unchecked" })
-public static HashMap toHashMap(String htmlString)
+public static HashMap htmlToHashMap(String htmlString)
   {
     Document doc = Jsoup.parse(htmlString);
     Elements elements = doc.getElementsByTag("input");

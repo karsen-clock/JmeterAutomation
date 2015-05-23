@@ -17,8 +17,8 @@ public class MapToJsonTest {
 		JsonToHashMap ps=new JsonToHashMap();
 		
 		try {
-			System.out.println(ps.parserToMap(json.toString(), true));
-			JSONObject json2 = new JSONObject(ps.parserToMap(json.toString(), true));
+			System.out.println(ps.jsonToHashMap(json.toString(), true));
+			JSONObject json2 = new JSONObject(ps.jsonToHashMap(json.toString(), true));
 			System.out.println(json2.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

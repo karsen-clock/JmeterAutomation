@@ -56,7 +56,7 @@ public class Test1 {
         JsonToHashMapFastJson js=new JsonToHashMapFastJson();
         System.out.println("hhele");
         HashMap<String,Object> hh=new HashMap<String,Object>();
-        hh=js.paraseToMap(ss);
+        hh=js.jsonToHashMap(ss);
         hh.put("cctv"," ");
         System.out.println(hh);
         System.out.println(js.toJsonString(hh,true));

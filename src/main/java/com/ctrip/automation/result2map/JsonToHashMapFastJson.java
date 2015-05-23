@@ -54,7 +54,7 @@ public class JsonToHashMapFastJson
   
   
   @SuppressWarnings("unchecked")
-public static HashMap<String,Object> paraseToMap(String s)
+public static HashMap<String,Object> jsonToHashMap(String s)
   {
 
 
@@ -83,7 +83,7 @@ public static HashMap<String,Object> paraseToMap(String s)
 			  {
 				  
 
-				  hashMapList.add(paraseToMap(listIterator.next().toString()));
+				  hashMapList.add(jsonToHashMap(listIterator.next().toString()));
 				
 			  }
 			  mapResult.put(key, hashMapList);
