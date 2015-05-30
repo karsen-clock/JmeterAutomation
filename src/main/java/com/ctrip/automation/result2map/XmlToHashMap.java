@@ -8,15 +8,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 
 public class XmlToHashMap
 {
   @SuppressWarnings("unchecked")
-public static Map<String, Object> dom2Map(Document doc)
+public static Map<String, Object> dom2Map(String xmlString) throws DocumentException
   {
     @SuppressWarnings("rawtypes")
+    Document doc = DocumentHelper.parseText(xmlString);
 	Map map = new HashMap();
     if (doc == null)
       return map;
