@@ -36,7 +36,7 @@
 		<artifactId>sqljdbc4</artifactId>
 		<version>4.0</version>
 		<scope>system</scope>
-		<systemPath>${project.basedir}/src/main/thirdjar/sqljdbc4.jar</systemPath>
+		<systemPath>${project.basedir}/src/main/resources/sqljdbc4.jar</systemPath>
     </dependency>
         <dependency>
 		<groupId>org.apache.jmeter</groupId>
