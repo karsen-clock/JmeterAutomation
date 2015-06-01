@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>Ctrip</groupId>
   <artifactId>CtripAutomation</artifactId>
-  <version>0.5.0-SNAPSHOT</version>
+  <version>0.6.0-SNAPSHOT</version>
   <name>CtripAutomation-Jmeter</name>
   <description>running jmeter external class</description>
   <dependencies>
@@ -35,6 +35,15 @@
 		<groupId>com.microsoft.sqlserver</groupId>
 		<artifactId>sqljdbc4</artifactId>
 		<version>4.0</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/src/main/thirdjar/sqljdbc4.jar</systemPath>
+    </dependency>
+        <dependency>
+		<groupId>org.apache.jmeter</groupId>
+		<artifactId>ApacheJMeter_functions</artifactId>
+		<version>2.13</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/src/main/resources/ApacheJMeter_functions.jar</systemPath>
     </dependency>
     <dependency>
 		<groupId>com.alibaba</groupId>
@@ -161,6 +170,32 @@
                     </execution>
                 </executions>
      </plugin>
+     
+						<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>assembly-deploy-package</id>
+								<phase>package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<mkdir dir="${project.build.directory}/lib/ext" />
+										  <copy todir="${project.build.directory}/lib/ext" >
+    										<fileset dir="${project.build.directory}/lib" includes="ApacheJMeter_functions.jar"/>
+  										  </copy>
+  										  <delete file="${project.build.directory}/lib/ApacheJMeter_functions.jar" />
+  										  <delete file="${project.build.directory}/lib/xml-apis-1.0.b2.jar" />
+									</tasks>
+
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+     
      
      <plugin>
 	<groupId>org.apache.maven.plugins</groupId>

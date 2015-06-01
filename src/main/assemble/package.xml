@@ -10,10 +10,6 @@
             <directory>src/main/java</directory>
             <outputDirectory>/</outputDirectory>
         </fileSet>
-        <fileSet>
-            <directory>src/main/resources</directory>
-            <outputDirectory>resources</outputDirectory>
-        </fileSet>
     </fileSets>
     <dependencySets>
         <dependencySet>
