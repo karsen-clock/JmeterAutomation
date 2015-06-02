@@ -190,9 +190,9 @@
 									<tasks>
 										<mkdir dir="${project.build.directory}/lib/ext" />
 										  <copy todir="${project.build.directory}/lib/ext" >
-    										<fileset dir="${project.build.directory}/lib" includes="ApacheJMeter_functions.jar"/>
+    										<fileset dir="${project.build.directory}/lib" includes="ApacheJMeter_functions-1.0.jar"/>
   										  </copy>
-  										  <delete file="${project.build.directory}/lib/ApacheJMeter_functions.jar" />
+  										  <delete file="${project.build.directory}/lib/ApacheJMeter_functions-1.0.jar" />
   										  <delete file="${project.build.directory}/lib/xml-apis-1.0.b2.jar" />
 									</tasks>
 
