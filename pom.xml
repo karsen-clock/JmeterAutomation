@@ -40,11 +40,11 @@
 		<systemPath>${project.basedir}/src/main/resources/sqljdbc4.jar</systemPath> 
 		-->
     </dependency>
-        <dependency>
-		<groupId>org.apache.jmeter</groupId>
-		<artifactId>ApacheJMeter_functions</artifactId>
-		<version>1.0</version>
-		</dependency>
+	<dependency>
+	<groupId>org.apache.jmeter</groupId>
+	<artifactId>ApacheJMeter_functions</artifactId>
+	<version>1.0</version>
+	</dependency>
 <!--  
 		<scope>system</scope>
 		<systemPath>${project.basedir}/src/main/resources/ApacheJMeter_functions.jar</systemPath>
