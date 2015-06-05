@@ -41,9 +41,9 @@
 		-->
     </dependency>
 	<dependency>
-	<groupId>org.apache.jmeter</groupId>
-	<artifactId>ApacheJMeter_functions</artifactId>
-	<version>1.0</version>
+		<groupId>org.apache.jmeter</groupId>
+		<artifactId>ApacheJMeter_functions</artifactId>
+		<version>1.0</version>
 	</dependency>
 <!--  
 		<scope>system</scope>
