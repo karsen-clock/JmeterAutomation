@@ -1,21 +1,11 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.ctrip.automation.common.GetValueFromHashMap;
-import com.ctrip.automation.result2map.HtmlToHashMap;
-import com.ctrip.automation.result2map.JsonToHashMap;
 import com.ctrip.automation.result2map.JsonToHashMapFastJson;
 
-
-import com.alibaba.fastjson.parser.Feature;
-
-import java.util.Map;
 
 import org.json.JSONException;
  
