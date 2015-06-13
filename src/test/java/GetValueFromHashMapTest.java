@@ -59,8 +59,6 @@ public class GetValueFromHashMapTest {
        //System.out.println(((HashMap<String,Object>) ((ArrayList) js.parserToMap(ss).get("payInfo")).get(0)).get("payInfoMain"));
        //System.out.println (((List) ((HashMap<String,Object>) js.parserToMap(ss).get("SearchOrderResult")).get("ItineraryList")).get(0));
         
-        
-        
 
     }
  
