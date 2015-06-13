@@ -48,13 +48,16 @@ public static HashMap<String,Object> parserToMap(String s)
   }
   
   
-  public static HashMap<String,Object> jsonToHashMap(String s,Boolean lite)
+  @SuppressWarnings("unchecked")
+public static HashMap<String,Object> jsonToHashMap(String s,Boolean lite)
 		    throws JSONException
 		  {
-		    HashMap map = new HashMap();
+		    @SuppressWarnings("rawtypes")
+			HashMap map = new HashMap();
 		    List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
 		    JSONObject json = new JSONObject(s);
-		    Iterator keys = json.keys();
+		    @SuppressWarnings("rawtypes")
+			Iterator keys = json.keys();
 		    while (keys.hasNext()) {
 		      String key = (String)keys.next();
 		      String value = json.get(key).toString();

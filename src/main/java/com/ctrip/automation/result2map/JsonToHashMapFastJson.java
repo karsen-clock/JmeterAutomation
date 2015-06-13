@@ -2,22 +2,14 @@ package com.ctrip.automation.result2map;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
-import java.util.Map;
-
-
-
 import java.util.Map.Entry;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.alibaba.fastjson.JSONException;
-import com.alibaba.fastjson.parser.Feature;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 
@@ -64,11 +56,14 @@ public static HashMap<String,Object> jsonToHashMap(String s)
 	  
 	  HashMap<String,Object> mapResult=new HashMap<String,Object>();
 	  mapResult=parseToMapJSONObject(s);
-	  List hashMapList=new ArrayList();
-	  Iterator iter = mapResult.entrySet().iterator();
+	  @SuppressWarnings("rawtypes")
+	List hashMapList=new ArrayList();
+	  @SuppressWarnings("rawtypes")
+	Iterator iter = mapResult.entrySet().iterator();
 	  while(iter.hasNext())
 	  {
-		  Entry entry=(Entry) iter.next();
+		  @SuppressWarnings("rawtypes")
+		Entry entry=(Entry) iter.next();
 		  String key=entry.getKey().toString();
 		  Object value=entry.getValue();
 
@@ -77,7 +72,8 @@ public static HashMap<String,Object> jsonToHashMap(String s)
 		  {
 			  JSONArray list=JSON.parseArray(value.toString());
 			 
-			  Iterator listIterator=list.iterator();
+			  @SuppressWarnings("rawtypes")
+			Iterator listIterator=list.iterator();
 			  
 			  while(listIterator.hasNext())
 			  {

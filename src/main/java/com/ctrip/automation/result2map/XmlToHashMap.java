@@ -20,6 +20,7 @@ public static Map<String, Object> dom2Map(String xmlString) throws DocumentExcep
   {
     @SuppressWarnings("rawtypes")
     Document doc = DocumentHelper.parseText(xmlString);
+	@SuppressWarnings("rawtypes")
 	Map map = new HashMap();
     if (doc == null)
       return map;
