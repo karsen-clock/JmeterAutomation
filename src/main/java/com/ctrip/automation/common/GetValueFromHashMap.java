@@ -10,38 +10,79 @@ import java.util.Map;
 public class GetValueFromHashMap {
 	
 	Object objectTemp=new Object();	
-	public String getValue(String key,@SuppressWarnings("rawtypes") HashMap map)
+	@SuppressWarnings("rawtypes")
+	HashMap mapTemp=new HashMap();
+	HashMap mapTempSub=new HashMap();
+	@SuppressWarnings("rawtypes")
+	ArrayList listTemp=new ArrayList();
+	public ArrayList getValue(String key,HashMap map)
 	{ 
 
 		objectTemp=map.get(key);
 		@SuppressWarnings("rawtypes")
 		Iterator iter = map.entrySet().iterator();  
-		while (iter.hasNext() && objectTemp==null) {  
+		while (iter.hasNext()) {  
 		    @SuppressWarnings("rawtypes")
 			Map.Entry entry = (Map.Entry) iter.next();  
 		    Object val = entry.getValue();
-		    getChildNode(key,val);
-		} 
-		
-		return objectTemp.toString();
-	}
-	
-	@SuppressWarnings("rawtypes")
-	public void getChildNode(String key,Object val)
-	{
-		 if(val.getClass().getName().equals("java.util.ArrayList"))
+		    
+		    if(val.getClass().getName().equals("java.util.ArrayList"))
 		    {
 		    	@SuppressWarnings("rawtypes")
 				List list=(List) val;
 		    	for(Iterator ite=list.iterator();ite.hasNext();)
 		    	{
-		    		getValue(key,(HashMap) ite.next());
+		    		getValueSub(key,(HashMap) ite.next());
 		    	}
 		    }
-		 if(val.getClass().getName().equals("java.util.HashMap"))
+		    if(val.getClass().getName().equals("java.util.HashMap"))
 		    {
-		    		getValue(key,(HashMap) val);
+			 		
+			 		getValueSub(key,(HashMap) val);
 		    }
+		    getValueSub(key,mapTemp);
+		 
+		} 
+		
+		return listTemp;
+	}
+	
+	
+	public void getValueSub(String key,HashMap map)
+	{ 
+		mapTempSub=map;
+		objectTemp=map.get(key);
+		if(objectTemp!=null)
+		{
+		listTemp.add(objectTemp);
+		}
+		@SuppressWarnings("rawtypes")
+		Iterator iter = map.entrySet().iterator();  
+		while (iter.hasNext()) {  
+		    @SuppressWarnings("rawtypes")
+			Map.Entry entry = (Map.Entry) iter.next();  
+		    Object val = entry.getValue();
+		    Object keySub=entry.getKey();
+		    //System.out.println(keySub.toString()+"="+val.toString());
+		    iter.remove();
+		    mapTemp=map;
+		    if(val.getClass().getName().equals("java.util.ArrayList"))
+		    {
+		    	@SuppressWarnings("rawtypes")
+				List list=(List) val;
+		    	for(Iterator ite=list.iterator();ite.hasNext();)
+		    	{
+		    		getValueSub(key,(HashMap) ite.next());
+		    	}
+		    }
+		    if(val.getClass().getName().equals("java.util.HashMap"))
+		    {		
+			 		getValueSub(key,(HashMap) val);
+		    }
+		    
+		   
+		}  
+		 
 	}
 
 }
