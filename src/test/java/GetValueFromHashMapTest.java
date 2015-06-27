@@ -11,6 +11,7 @@ import com.ctrip.automation.result2map.XmlToHashMap;
 
 
 
+
 import org.dom4j.DocumentException;
 import org.json.JSONException;
  
@@ -29,7 +30,7 @@ public class GetValueFromHashMapTest {
 	            
 	            
 //                文件绝对路径改成你自己的文件路径
-        FileReader fr=new FileReader("d:\\Users\\cdzhang\\Desktop\\xml.txt");
+        FileReader fr=new FileReader("C:\\Users\\hasee\\Desktop\\xml.txt");
         StringBuilder sb=new StringBuilder();
         String s="";
         //可以换成工程目录下的其他文本文件
@@ -46,11 +47,13 @@ public class GetValueFromHashMapTest {
     	 
     	XmlToHashMap ss2=new XmlToHashMap();
     	Map  sss=ss2.dom2Map(ss);
+   
     	
     	GetValueFromHashMap getResult=new GetValueFromHashMap();
     	System.out.println(sss);
+    	System.out.println(getResult.getValue("RoomInfo", (HashMap) sss));
         System.out.println(getResult.getValue("PayType", (HashMap) sss));
-        System.out.println(sss);
+        //System.out.println(sss);
         System.out.println(getResult.getValue("RoomID", (HashMap) sss));
        // JsonToHashMapFastJson js=new JsonToHashMapFastJson();
         //HashMap<String,Object> hh=new HashMap<String,Object>();

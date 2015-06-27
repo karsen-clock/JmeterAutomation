@@ -10,25 +10,21 @@ import java.util.Map;
 public class GetValueFromHashMap {
 	
 	 Object objectTemp=new Object();	
-	@SuppressWarnings("rawtypes")
 	 HashMap mapTemp=new HashMap();
-	//HashMap mapTempSub=new HashMap();
-	@SuppressWarnings("rawtypes")
 	 ArrayList listTemp=new ArrayList();
+	 
 	public ArrayList getValue(String key,HashMap map)
 	{ 	
-
+		
+		listTemp.clear();
 		objectTemp=map.get(key);
-		@SuppressWarnings("rawtypes")
 		Iterator iter = map.entrySet().iterator();  
 		while (iter.hasNext()) {  
-		    @SuppressWarnings("rawtypes")
 			Map.Entry entry = (Map.Entry) iter.next();  
 		    Object val = entry.getValue();
 		    
 		    if(val.getClass().getName().equals("java.util.ArrayList"))
 		    {
-		    	@SuppressWarnings("rawtypes")
 				List list=(List) val;
 		    	for(Iterator ite=list.iterator();ite.hasNext();)
 		    	{
@@ -40,35 +36,34 @@ public class GetValueFromHashMap {
 			 		
 			 		getValueSub(key,(HashMap) val);
 		    }
-		    getValueSub(key,mapTemp);
+		   
+		    //getValueSub(key,mapTemp);
 		 
-		} 
-		
+		}
 		return listTemp;
 	}
 	
 	
-	public void getValueSub(String key,HashMap mapSub)
+	public  void  getValueSub(String key,HashMap mapSub)
 	{ 
 		//mapTempSub=map;
 		objectTemp=mapSub.get(key);
 		if(objectTemp!=null)
 		{
 		listTemp.add(objectTemp);
+		System.out.println(listTemp);
 		}
-		@SuppressWarnings("rawtypes")
-		Iterator iter = mapSub.entrySet().iterator();  
-		while (iter.hasNext()) {  
-		    @SuppressWarnings("rawtypes")
-			Map.Entry entry = (Map.Entry) iter.next();  
+		Iterator iterSub = mapSub.entrySet().iterator();  
+		while (iterSub.hasNext()) 
+		{  
+			Map.Entry entry = (Map.Entry) iterSub.next();  
 		    Object valSub = entry.getValue();
 		    Object keySub=entry.getKey();
-		    //System.out.println(keySub.toString()+"="+val.toString());
-		    iter.remove();
+		    //iterSub.remove();
+		    
 		    mapTemp=mapSub;
 		    if(valSub.getClass().getName().equals("java.util.ArrayList"))
 		    {
-		    	@SuppressWarnings("rawtypes")
 				List list=(List) valSub;
 		    	for(Iterator ite=list.iterator();ite.hasNext();)
 		    	{
@@ -80,7 +75,6 @@ public class GetValueFromHashMap {
 			 		getValueSub(key,(HashMap) valSub);
 		    }
 		    
-		   
 		}  
 		 
 	}
