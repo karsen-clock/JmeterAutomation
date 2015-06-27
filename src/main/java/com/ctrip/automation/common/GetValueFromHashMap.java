@@ -51,7 +51,6 @@ public class GetValueFromHashMap {
 		if(objectTemp!=null)
 		{
 		listTemp.add(objectTemp);
-		System.out.println(listTemp);
 		}
 		Iterator iterSub = mapSub.entrySet().iterator();  
 		while (iterSub.hasNext()) 
