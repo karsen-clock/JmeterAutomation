@@ -9,14 +9,14 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class GetValueFromHashMap {
 	
-	Object objectTemp=new Object();	
+	 Object objectTemp=new Object();	
 	@SuppressWarnings("rawtypes")
-	HashMap mapTemp=new HashMap();
-	HashMap mapTempSub=new HashMap();
+	 HashMap mapTemp=new HashMap();
+	//HashMap mapTempSub=new HashMap();
 	@SuppressWarnings("rawtypes")
-	ArrayList listTemp=new ArrayList();
+	 ArrayList listTemp=new ArrayList();
 	public ArrayList getValue(String key,HashMap map)
-	{ 
+	{ 	
 
 		objectTemp=map.get(key);
 		@SuppressWarnings("rawtypes")
@@ -48,36 +48,36 @@ public class GetValueFromHashMap {
 	}
 	
 	
-	public void getValueSub(String key,HashMap map)
+	public void getValueSub(String key,HashMap mapSub)
 	{ 
-		mapTempSub=map;
-		objectTemp=map.get(key);
+		//mapTempSub=map;
+		objectTemp=mapSub.get(key);
 		if(objectTemp!=null)
 		{
 		listTemp.add(objectTemp);
 		}
 		@SuppressWarnings("rawtypes")
-		Iterator iter = map.entrySet().iterator();  
+		Iterator iter = mapSub.entrySet().iterator();  
 		while (iter.hasNext()) {  
 		    @SuppressWarnings("rawtypes")
 			Map.Entry entry = (Map.Entry) iter.next();  
-		    Object val = entry.getValue();
+		    Object valSub = entry.getValue();
 		    Object keySub=entry.getKey();
 		    //System.out.println(keySub.toString()+"="+val.toString());
 		    iter.remove();
-		    mapTemp=map;
-		    if(val.getClass().getName().equals("java.util.ArrayList"))
+		    mapTemp=mapSub;
+		    if(valSub.getClass().getName().equals("java.util.ArrayList"))
 		    {
 		    	@SuppressWarnings("rawtypes")
-				List list=(List) val;
+				List list=(List) valSub;
 		    	for(Iterator ite=list.iterator();ite.hasNext();)
 		    	{
 		    		getValueSub(key,(HashMap) ite.next());
 		    	}
 		    }
-		    if(val.getClass().getName().equals("java.util.HashMap"))
+		    if(valSub.getClass().getName().equals("java.util.HashMap"))
 		    {		
-			 		getValueSub(key,(HashMap) val);
+			 		getValueSub(key,(HashMap) valSub);
 		    }
 		    
 		   

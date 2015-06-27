@@ -43,12 +43,14 @@ public class GetValueFromHashMapTest {
         br.close();
         String ss=new String(sb.toString().getBytes(),"UTF-8");
         
-    	Map sss=new HashMap();
+    	 
     	XmlToHashMap ss2=new XmlToHashMap();
-    	sss=ss2.dom2Map(ss);
+    	Map  sss=ss2.dom2Map(ss);
     	
     	GetValueFromHashMap getResult=new GetValueFromHashMap();
-    	
+    	System.out.println(sss);
+        System.out.println(getResult.getValue("PayType", (HashMap) sss));
+        System.out.println(sss);
         System.out.println(getResult.getValue("RoomID", (HashMap) sss));
        // JsonToHashMapFastJson js=new JsonToHashMapFastJson();
         //HashMap<String,Object> hh=new HashMap<String,Object>();
