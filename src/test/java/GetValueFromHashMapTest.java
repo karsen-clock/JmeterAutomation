@@ -30,7 +30,7 @@ public class GetValueFromHashMapTest {
 	            
 	            
 //                文件绝对路径改成你自己的文件路径
-        FileReader fr=new FileReader("C:\\Users\\hasee\\Desktop\\xml.txt");
+        FileReader fr=new FileReader("d:\\Users\\cdzhang\\Desktop\\xml.txt");
         StringBuilder sb=new StringBuilder();
         String s="";
         //可以换成工程目录下的其他文本文件
