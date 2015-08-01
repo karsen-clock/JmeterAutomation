@@ -11,7 +11,7 @@ public class TestPOI {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		OperateExcel excel=new OperateExcel();
-		String fullFilePath="C:\\hello.xls";
+		String fullFilePath="target/hello.xls";
 		String sheetName="Test";
 		List value=new ArrayList();
 		value.add("act002");
