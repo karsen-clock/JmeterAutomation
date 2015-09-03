@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -18,8 +19,10 @@ public class XmlToHashMap
   @SuppressWarnings("unchecked")
 public static Map<String, Object> dom2Map(String xmlString) throws DocumentException
   {
+
     @SuppressWarnings("rawtypes")
     Document doc = DocumentHelper.parseText(xmlString);
+    
 	@SuppressWarnings("rawtypes")
 	Map map = new HashMap();
     if (doc == null)

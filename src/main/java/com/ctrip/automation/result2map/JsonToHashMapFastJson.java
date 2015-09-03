@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
@@ -39,9 +40,7 @@ public class JsonToHashMapFastJson
   {
 	  
 	  HashMap<String, Object> map=JSON.parseObject(s, new TypeReference<HashMap<String,Object>>(){});
-
-	 
-	  return map;
+ 	  return map;
   }
   
   
@@ -49,50 +48,57 @@ public class JsonToHashMapFastJson
 public static HashMap<String,Object> jsonToHashMap(String s)
   {
 
+	        @SuppressWarnings("rawtypes")
+			HashMap jsonMap = JSON.parseObject(s, HashMap.class);
+	 
+	        HashMap<String, Object> resultMap = new HashMap<String, Object>();
+	        for(Iterator iter = jsonMap.keySet().iterator(); iter.hasNext();){
+	            String key = (String)iter.next();
+	            if(jsonMap.get(key) instanceof JSONArray){
+	                JSONArray jsonArray = (JSONArray)jsonMap.get(key);
+	                @SuppressWarnings("rawtypes")
+					List list = handleJSONArray(jsonArray);
+	                resultMap.put(key, list);
+	            }
+	            else if(jsonMap.get(key) instanceof JSONObject){
+	            	//如果是嵌套的json，则重复再次转换，否则直接存入MAP
+	            	 resultMap.put(key, JSON.parseObject(jsonMap.get(key).toString(), HashMap.class));   
+	            }
+	            else{
+	            	 resultMap.put(key, jsonMap.get(key));
+	            }
+	        }
+	        return resultMap;
+	}
+	    @SuppressWarnings("unchecked")
+		private static  List<HashMap<String, Object>> handleJSONArray(JSONArray jsonArray){
+	        @SuppressWarnings("rawtypes")
+			List list = new ArrayList();
 
+	        for (Object object : jsonArray) {
+	        	 
+	        	HashMap<String, Object> map = new HashMap<String, Object>();
+	        	if(object.toString().contains("{") && object.toString().contains("}") )
+	        	{
+	            JSONObject jsonObject = (JSONObject) object;
+	            for (Entry<String, Object> entry : jsonObject.entrySet()) {
+	                if(entry.getValue() instanceof  JSONArray){
+	                    map.put((String)entry.getKey(), handleJSONArray((JSONArray)entry.getValue()));
+	                }else{
+	                    map.put((String)entry.getKey(), entry.getValue());
+	                }
+	            }
+	            list.add(map);
+	        	}
+	            else
+	            {
+	             list.add(object.toString());
+	            }
+	        	 
+	            }
+	        return list;
+	        }
 
-
-
-	  
-	  HashMap<String,Object> mapResult=new HashMap<String,Object>();
-	  mapResult=parseToMapJSONObject(s);
-	  @SuppressWarnings("rawtypes")
-	List hashMapList=new ArrayList();
-	  @SuppressWarnings("rawtypes")
-	Iterator iter = mapResult.entrySet().iterator();
-	  while(iter.hasNext())
-	  {
-		  @SuppressWarnings("rawtypes")
-		Entry entry=(Entry) iter.next();
-		  String key=entry.getKey().toString();
-		  Object value=entry.getValue();
-
-		  //如果是jsonarray则保存在list中并修改map的value
-		  if(value.getClass().getName()=="com.alibaba.fastjson.JSONArray")
-		  {
-			  JSONArray list=JSON.parseArray(value.toString());
-			 
-			  @SuppressWarnings("rawtypes")
-			Iterator listIterator=list.iterator();
-			  
-			  while(listIterator.hasNext())
-			  {
-				  
-
-				  hashMapList.add(jsonToHashMap(listIterator.next().toString()));
-				
-			  }
-			  mapResult.put(key, hashMapList);
-		  }
-		  //如果是JSONObject则直接修改map
-		  else if(value.getClass().getName()=="com.alibaba.fastjson.JSONObject")
-		  {
-			  mapResult.put(key, parseToMapJSONObject(value.toString()));
-		  }
-
-	  }
-	  return mapResult;
-  }
   
   //序列化
   public static String toJsonString(Object map)
@@ -126,6 +132,8 @@ public static HashMap<String,Object> jsonToHashMap(String s)
   {
 	  String jsonString=JSON.toJSONString(map,features);
 	  return jsonString;
+	  
+		
   }
  
 }

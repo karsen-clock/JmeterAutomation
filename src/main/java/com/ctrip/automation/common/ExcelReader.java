@@ -5,10 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.IdentityHashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -29,10 +30,12 @@ public class ExcelReader {
 	     * @param InputStream
 	     * @return String 表头内容的数组
 	     */
-	    public String[] readExcelTitle(String filePath,String sheetName,int sheetIndex,int rowIndex) {
+	    @SuppressWarnings("deprecation")
+		public String[] readExcelTitle(String filePath,int sheetIndex,int rowIndex) {
+	    	InputStream is = null;
 	    	try {
 	            // 对读取Excel表格标题测试
-	            InputStream is = new FileInputStream(filePath);
+	            is= new FileInputStream(filePath);
 	            ExcelReader excelReader = new ExcelReader();
 	            String[] title ;
 	    	
@@ -48,6 +51,7 @@ public class ExcelReader {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
+	    	
 	        sheet = wb.getSheetAt(sheetIndex);
 	        row = sheet.getRow(rowIndex);
 	        // 标题总列数
@@ -56,7 +60,7 @@ public class ExcelReader {
 	        String[] title = new String[colNum];
 	        for (int i = 0; i < colNum; i++) {
 	            //title[i] = getStringCellValue(row.getCell((short) i));
-	            title[i] = getCellFormatValue(row.getCell((short) i));
+	            title[i] = getCellFormatValue(row.getCell(i));
 	        }
 	        return title;
 	    }
@@ -66,11 +70,12 @@ public class ExcelReader {
 	     * @param InputStream
 	     * @return Map 包含单元格数据内容的Map对象
 	     */
-	    public Map<Integer, String> readExcelContent(String filePath,String sheetName,int sheetIndex,int rowIndex) {
-	    	
+	    
+		public List readExcelContent(String filePath,int sheetIndex,int rowIndex) {
+	    	   InputStream is=null;
 	    	try {
 	            // 对读取Excel表格标题测试
-	            InputStream is = new FileInputStream(filePath);
+	            is = new FileInputStream(filePath);
 	            ExcelReader excelReader = new ExcelReader();
 	            String[] title ;
 	    	
@@ -80,10 +85,12 @@ public class ExcelReader {
 	        }
 	           
 	    	
-	    }
-	    IdentityHashMap<String,Object> content = new IdentityHashMap<String, String>();
+
+	    
 	        String str = "";
-	        String [] title=readExcelContent(String filePath,String sheetName,int sheetIndex,int rowIndex);
+	        List list=new ArrayList();
+	        String [] title=readExcelTitle(filePath,sheetIndex,0);
+	        
 	        try {
 	            fs = new POIFSFileSystem(is);
 	            wb = new HSSFWorkbook(fs);
@@ -99,19 +106,24 @@ public class ExcelReader {
 	        for (int i = 1; i <= rowNum; i++) {
 	            row = sheet.getRow(i);
 	            int j = 0;
+	            IdentityHashMap<String,String> content = new IdentityHashMap<String, String>();
 	            while (j < colNum) {
 	                // 每个单元格的数据内容用"-"分割开，以后需要时用String类的replace()方法还原数据
 	                // 也可以将每个单元格的数据设置到一个javabean的属性中，此时需要新建一个javabean
 	                // str += getStringCellValue(row.getCell((short) j)).trim() +
 	                // "-";
-	                str += getCellFormatValue(row.getCell((short) j)).trim() + "    ";
+	                str += getCellFormatValue(row.getCell(j)).trim() + "    ";
+		            content.put(title[j].toString(), str);
+		            list.add(content);
+		            str = "";
 	                j++;
 	            }
 	            
-	            content.put(title[i].toString(), str);
-	            str = "";
+	            //将标题作为 KEY,body作为内容存入MAP
+
+	            
 	        }
-	        return content;
+	        return list;
 	    }
 
 	    /**
@@ -120,7 +132,8 @@ public class ExcelReader {
 	     * @param cell Excel单元格
 	     * @return String 单元格数据内容
 	     */
-	    private String getStringCellValue(HSSFCell cell) {
+	    @SuppressWarnings("unused")
+		private String getStringCellValue(HSSFCell cell) {
 	        String strCell = "";
 	        switch (cell.getCellType()) {
 	        case HSSFCell.CELL_TYPE_STRING:
@@ -155,26 +168,27 @@ public class ExcelReader {
 	     *            Excel单元格
 	     * @return String 单元格数据内容
 	     */
-	    private String getDateCellValue(HSSFCell cell) {
-	        String result = "";
-	        try {
-	            int cellType = cell.getCellType();
-	            if (cellType == HSSFCell.CELL_TYPE_NUMERIC) {
-	                Date date = cell.getDateCellValue();
-	                result = (date.getYear() + 1900) + "-" + (date.getMonth() + 1)
-	                        + "-" + date.getDate();
-	            } else if (cellType == HSSFCell.CELL_TYPE_STRING) {
-	                String date = getStringCellValue(cell);
-	                result = date.replaceAll("[年月]", "-").replace("日", "").trim();
-	            } else if (cellType == HSSFCell.CELL_TYPE_BLANK) {
-	                result = "";
-	            }
-	        } catch (Exception e) {
-	            System.out.println("日期格式不正确!");
-	            e.printStackTrace();
-	        }
-	        return result;
-	    }
+//	    private String getDateCellValue(HSSFCell cell) {
+//	        String result = "";
+//	        try {
+//	            int cellType = cell.getCellType();
+//	            if (cellType == HSSFCell.CELL_TYPE_NUMERIC) {
+//	                Date date = cell.getDateCellValue();
+//	                Calendar calendar = Calendar.getInstance();
+//	                result = (calendar.get(Calendar.YEAR)) + "-" + (calendar.get(Calendar.MONDAY) + 1)
+//	                        + "-" + calendar.get(Calendar.DATE);
+//	            } else if (cellType == HSSFCell.CELL_TYPE_STRING) {
+//	                String date = getStringCellValue(cell);
+//	                result = date.replaceAll("[年月]", "-").replace("日", "").trim();
+//	            } else if (cellType == HSSFCell.CELL_TYPE_BLANK) {
+//	                result = "";
+//	            }
+//	        } catch (Exception e) {
+//	            System.out.println("日期格式不正确!");
+//	            e.printStackTrace();
+//	        }
+//	        return result;
+//	    }
 
 	    /**
 	     * 根据HSSFCell类型设置数据
