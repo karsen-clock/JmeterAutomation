@@ -7,7 +7,7 @@ import java.io.IOException;
 import com.ctrip.automation.common.GetValueFromHashMap;
 import com.ctrip.automation.result2map.JsonToHashMapFastJson;
 import com.ctrip.automation.result2map.XmlToHashMap;
-
+import com.ctrip.automation.result2map.HtmlToHashMap;
 
 
 
@@ -30,7 +30,7 @@ public class GetValueFromHashMapTest {
 	            
 	            
 //                文件绝对路径改成你自己的文件路径
-        FileReader fr=new FileReader("d:\\Users\\cdzhang\\Desktop\\xml.txt");
+        FileReader fr=new FileReader("d:\\Users\\cdzhang\\Desktop\\json.txt");
         StringBuilder sb=new StringBuilder();
         String s="";
         //可以换成工程目录下的其他文本文件
@@ -43,18 +43,25 @@ public class GetValueFromHashMapTest {
         
         br.close();
         String ss=new String(sb.toString().getBytes(),"UTF-8");
+        String a="0";
+		String logInfo=a.equals("0") ? "DEBUG" : (a.equals("1") ? "INFO" : (a.equals("2") ? "WARN" : (a.equals("3") ? "ERROR" : "FATAL")));
+        System.out.println(a.equals("0"));
+		//HtmlToHashMap ss=new HtmlToHashMap();
+        //ss.htmlToHashMap(htmlString);
+    	//XmlToHashMap ss2=new XmlToHashMap();
+    	//Map  sss=ss2.dom2Map(ss);
         
-    	 
-    	XmlToHashMap ss2=new XmlToHashMap();
-    	Map  sss=ss2.dom2Map(ss);
-   
-    	
-    	GetValueFromHashMap getResult=new GetValueFromHashMap();
+        System.out.println(ss);
+        JsonToHashMapFastJson js=new JsonToHashMapFastJson();
+        Map sss= js.jsonToHashMap(ss);
     	System.out.println(sss);
-    	System.out.println(getResult.getValue("RoomInfo", (HashMap) sss));
-        System.out.println(getResult.getValue("PayType", (HashMap) sss));
+    	GetValueFromHashMap getResult=new GetValueFromHashMap();
+    
+    	System.out.println(getResult.getValue("Timestamp", (HashMap) sss).toString());
+    	
+       // System.out.println(getResult.getValue("PayType", (HashMap) sss));
         //System.out.println(sss);
-        System.out.println(getResult.getValue("RoomID", (HashMap) sss));
+       // System.out.println(getResult.getValue("RoomID", (HashMap) sss));
        // JsonToHashMapFastJson js=new JsonToHashMapFastJson();
         //HashMap<String,Object> hh=new HashMap<String,Object>();
         //GetValueFromHashMap hashMapvalue=new GetValueFromHashMap();

@@ -11,15 +11,30 @@ import com.ctrip.automation.result2map.HtmlToHashMap;
 import com.ctrip.automation.result2map.JsonToHashMap;
 import com.ctrip.automation.result2map.JsonToHashMapFastJson;
 
+
+import com.alibaba.fastjson.parser.Feature;
+
+import java.util.Map;
+
+import org.json.JSONException;
  
 public class Test1 {
      
     @SuppressWarnings("static-access")
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args) throws IOException, JSONException
     {
     	
-
-        FileReader fr=new FileReader("C:\\Users\\hasee\\Desktop\\test.txt");
+    	
+    	
+//    	 String str = "welkes,sdlkwerj";  
+//	        String regex = "(?<=s)(,)(?=s)";  
+//	        String[] strs = str.split(regex);  
+//	        for(int i = 0; i < strs.length; i++) {  
+//	            System.out.printf("strs[%d] = %s%n", i, strs[i]);  
+	            
+	            
+//                文件绝对路径改成你自己的文件路径
+        FileReader fr=new FileReader("d:\\Users\\cdzhang\\Desktop\\json.txt");
         StringBuilder sb=new StringBuilder();
         String s="";
         //可以换成工程目录下的其他文本文件
@@ -35,11 +50,16 @@ public class Test1 {
         
         System.out.println(ss);
         
-       // Feature[] ff={Feature.InitStringFieldAsEmpty};
-       // SerializerFeature[] features={SerializerFeature.WriteMapNullValue}; 
+        Feature[] ff={Feature.InitStringFieldAsEmpty};
+        SerializerFeature[] features={SerializerFeature.WriteMapNullValue}; 
         
         JsonToHashMapFastJson js=new JsonToHashMapFastJson();
-        System.out.println(js.toJsonString(ss));
+        System.out.println("hhele");
+        HashMap<String,Object> hh=new HashMap<String,Object>();
+        hh=js.jsonToHashMap(ss);
+        hh.put("cctv"," ");
+        System.out.println(hh);
+        System.out.println(js.toJsonString(hh,true));
         
       
        //System.out.println(((HashMap<String,Object>) ((ArrayList) js.parserToMap(ss).get("payInfo")).get(0)).get("payInfoMain"));
