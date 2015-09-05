@@ -62,6 +62,7 @@ public class ExcelReader {
 	            //title[i] = getStringCellValue(row.getCell((short) i));
 	            title[i] = getCellFormatValue(row.getCell(i));
 	        }
+
 	        return title;
 	    }
 
@@ -114,16 +115,47 @@ public class ExcelReader {
 	                // "-";
 	                str += getCellFormatValue(row.getCell(j)).trim() + "    ";
 		            content.put(title[j].toString(), str);
-		            list.add(content);
+		           
 		            str = "";
 	                j++;
 	            }
-	            
+	            list.add(content);
 	            //将标题作为 KEY,body作为内容存入MAP
 
 	            
 	        }
 	        return list;
+	    }
+		
+		//获取指定行元素个数
+		public int [] getRowCellsNum(String filePath,String sheetName,int rowIndex) {
+	    	   InputStream is=null;
+	    	try {
+	            // 对读取Excel表格标题测试
+	            is = new FileInputStream(filePath);
+	            ExcelReader excelReader = new ExcelReader();
+	            String[] title ;
+	    	
+	        } catch (FileNotFoundException e) {
+	            System.out.println("未找到指定路径的文件!");
+	            e.printStackTrace();
+	        }
+	           
+	    	
+	        
+	        try {
+	            fs = new POIFSFileSystem(is);
+	            wb = new HSSFWorkbook(fs);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        sheet = wb.getSheet(sheetName);
+	        // 得到总行数
+	        int rowNum = sheet.getLastRowNum();
+	        row = sheet.getRow(rowIndex);
+	        int colNum = row.getPhysicalNumberOfCells();
+	        int  result []={rowNum,colNum};
+	        return result;
 	    }
 
 	    /**

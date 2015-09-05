@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.text.SimpleDateFormat;
 
@@ -28,22 +29,23 @@ public class TestPOI {
 		value2.add("2015-8-1");
 		value2.add("原因未知");
 		String styleType2="body";
-		excel.CreateExcelFile(fullFilePath, sheetName, value, styleType);
 		//excel.CreateExcelFile(fullFilePath, sheetName, value, styleType);
-		excel.CreateExcelFile(fullFilePath, sheetName, value2, styleType2);
+		//excel.CreateExcelFile(fullFilePath, sheetName, value, styleType);
+		//excel.CreateExcelFile(fullFilePath, sheetName, value2, styleType2);
 	
 		ExcelReader reader=new ExcelReader();
-		String [] xx=reader.readExcelTitle("C://test//hello.xls", "Test", 0);
-		System.out.println(xx[0]+"-"+xx[1]+xx[2]+xx[3]+xx.length);
-		
-		System.out.println(reader.readExcelContent("C://test//hello.xls", "Test", 0));
-		
+		//String [] xx=reader.readExcelTitle("C://test//hello.xls", "Test", 0);
+		//System.out.println(xx[0]+"-"+xx[1]+xx[2]+xx[3]+xx.length);
+
+		//System.out.println(reader.readExcelContent("C://test//hello.xls", "Test", 1).size());
+		System.out.println(reader.getRowCellsNum(fullFilePath, sheetName, 1)[1]);
+
 		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 String ss=formatter.format(new Date());
 		 System.out.println(ss);
 		 
 		 ExcelUpdater eu=new ExcelUpdater();
-		 eu.updateExcel(fullFilePath, "Test", 5, 4, "52212");
+		// eu.updateExcel(fullFilePath, "Test", 5, 4, "52212");
 
 	}
 
