@@ -18,18 +18,25 @@ public class ExcelUpdater {
 	public static void updateExcel(String fullFilePath,String sheetName,int col,int row,String value)throws Exception{
 		File file=new File(fullFilePath);
 		FileInputStream fis=new FileInputStream(fullFilePath);
-        HSSFWorkbook workbook=new HSSFWorkbook(fis);
-//        workbook.
+		POIFSFileSystem ps=new POIFSFileSystem(fis);
+        HSSFWorkbook workbook=new HSSFWorkbook(ps);
+
         HSSFSheet sheet=workbook.getSheet(sheetName);
 
         HSSFRow r=sheet.getRow(row);
+        if(null == r)
+        {
+        	r=sheet.createRow(row);
+        }
         HSSFCell cell=r.getCell(col);
-        int type=cell.getCellType();
-        //String str1=cell.getStringCellValue();
-        ExcelWriter excelWriter=new ExcelWriter();
-        HSSFCellStyle style=excelWriter.getStyle("title",value,workbook);
-        //这里假设对应单元格原来的类型也是String类型
+        if(null == cell)
+        {
+        	cell=r.createCell(col);
+        }
+        	
+
         cell.setCellValue(value);
+
         
 
         fis.close();//关闭文件输入流
