@@ -31,7 +31,7 @@ public class ExcelReader {
 	     * @return String 表头内容的数组
 	     */
 	    @SuppressWarnings("deprecation")
-		public String[] readExcelTitle(String filePath,int sheetIndex,int rowIndex) {
+		public String[] readExcelTitle(String filePath,String sheetName,int rowIndex) {
 	    	InputStream is = null;
 	    	try {
 	            // 对读取Excel表格标题测试
@@ -52,7 +52,7 @@ public class ExcelReader {
 	            e.printStackTrace();
 	        }
 	    	
-	        sheet = wb.getSheetAt(sheetIndex);
+	        sheet = wb.getSheet(sheetName);
 	        row = sheet.getRow(rowIndex);
 	        // 标题总列数
 	        int colNum = row.getPhysicalNumberOfCells();
@@ -71,7 +71,7 @@ public class ExcelReader {
 	     * @return Map 包含单元格数据内容的Map对象
 	     */
 	    
-		public List readExcelContent(String filePath,int sheetIndex,int rowIndex) {
+		public List readExcelContent(String filePath,String sheetName,int rowIndex) {
 	    	   InputStream is=null;
 	    	try {
 	            // 对读取Excel表格标题测试
@@ -89,7 +89,7 @@ public class ExcelReader {
 	    
 	        String str = "";
 	        List list=new ArrayList();
-	        String [] title=readExcelTitle(filePath,sheetIndex,0);
+	        String [] title=readExcelTitle(filePath,sheetName,0);
 	        
 	        try {
 	            fs = new POIFSFileSystem(is);
@@ -97,7 +97,7 @@ public class ExcelReader {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        sheet = wb.getSheetAt(sheetIndex);
+	        sheet = wb.getSheet(sheetName);
 	        // 得到总行数
 	        int rowNum = sheet.getLastRowNum();
 	        row = sheet.getRow(rowIndex);

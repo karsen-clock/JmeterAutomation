@@ -36,6 +36,10 @@ public class ExcelWriter {
         	wb = new HSSFWorkbook(ps);
         	sheet =wb.getSheet(sheetName);
         	initialRowNum=1;
+        	if(styleType.toLowerCase().equals("title"))
+        	{
+        		return;
+        	}
         	}
         	else
         	{
@@ -43,12 +47,12 @@ public class ExcelWriter {
         	initialRowNum=0;
         	}
         	                          // 设置excel每列宽度
-                sheet.setColumnWidth(0, 4000);
-                sheet.setColumnWidth(1, 2500);
+                sheet.setColumnWidth(0, 5000);
+                sheet.setColumnWidth(1, 3500);
                 
                 // 创建Excel的sheet的一行
                 HSSFRow row=sheet.getRow(0);
-                row=sheet.createRow((short)(sheet.getLastRowNum()+initialRowNum)); 
+                row=sheet.createRow((short)(sheet.getLastRowNum()+initialRowNum));
                 row.setHeight((short) 400);// 设定行的高度
 
 
