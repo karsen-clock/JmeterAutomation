@@ -38,7 +38,7 @@ public class TestPOI {
 		//System.out.println(xx[0]+"-"+xx[1]+xx[2]+xx[3]+xx.length);
 
 		//System.out.println(reader.readExcelContent("C://test//hello.xls", "Test", 1).size());
-		System.out.println(reader.getRowCellsNum(fullFilePath, sheetName, 1)[1]);
+		System.out.println(reader.getRowCellsNum(fullFilePath, sheetName, 0)[1]);
 
 		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 String ss=formatter.format(new Date());
